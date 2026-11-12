@@ -66,6 +66,15 @@ Step-by-step equations, a worked example, and a side-by-side comparison of the S
 Short version:
 
 - Normalized saturations: `Swd = (Sw - Swr) / (1 - Swr - Sor_ow)`, `Sgd = (Sg - Sgr) / (1 - Swr - Sor_og - Sgr)`
+
+Why each one differs:
+
+Water (SwD): this comes from the oil-water two-phase curve, with no gas present. Water goes from S_wr up to the point where oil is stuck at S_orw. The gas residual doesn’t appear because gas isn’t part of that system.
+
+Gas (SgD): this comes from the gas-oil curve, with connate water S_wr sitting in the pores. Gas starts flowing at S_gr and can fill everything except the water and the residual oil of the gas-oil system, S_org. The residual oil here is S_org, not S_orw, because the oil is being displaced by gas rather than water.
+
+Oil (SoD): oil flows above S_orw, and at most it fills what is left after the water sits at S_wr and the gas at S_gr. That gives 1 − S_wr − S_gr as the top. It uses S_orw as the lower end, which is why oil’s formula has S_gr but water’s doesn’t.
+
 - Two-phase curves: `krw = krwo·Swd^nw`, `krg = krgo·Sgd^ng`, `krow = kro_ow·(1 - Swd)^now`, `krog = kro_og·(1 - Sgd)^nog`
 - **Stone II:** `kro = kro_ow · [ (krow/kro_ow + krw)(krog/kro_ow + krg) − (krw + krg) ]`, floored at 0
 - **Stone I:** `kro = So* · krow · krog / ( kro_ow (1 − Sw*)(1 − Sg*) )`, with normalized saturations `Sw*, So*, Sg*` built from a minimum oil saturation `Som` that varies with `Sg`
